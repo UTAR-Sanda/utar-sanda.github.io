@@ -1,5 +1,7 @@
 # UTAR 散打基础训练手册
 
+网址：https://utar-sanda.github.io
+
 UTAR 武术散打队新人基础训练手册的网站版。
 
 - `index.html`：网页本身。
