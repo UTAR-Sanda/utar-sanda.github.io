@@ -3,15 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="UTAR 武术散打队新人基础训练手册：规则、步法、拳法、腿法、摔法、体能与专项。">
+<meta name="description" content="金宝优大武术团 UTAR Kampar Wushu Club 散打新人基础训练手册：规则、步法、拳法、腿法、摔法、体能与专项。">
 <title>UTAR 散打基础训练手册</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="UTAR 散打基础训练手册">
+<meta property="og:description" content="金宝优大武术团 · 散打新人基础训练手册">
+<meta property="og:image" content="https://utar-sanda.github.io/logo-full.jpg">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
 /* Layout: a training-log ledger — tally strip on top, filter rails, then one card per technique like an index card in a coach's box; cards with motion open an inline animated diagram */
 :root{
   --bg:#f5f3f0; --surface:#ffffff; --ink:#1c1a1a; --muted:#6b6461; --line:#e2ddd8;
-  --accent:#b3261e; --accent-soft:#f6e3e1; --blue:#2453a6; --stage:#faf8f6;
+  --accent:#8f6400; --accent-soft:#f6ecd2; --blue:#2453a6; --stage:#faf8f6;
   --a:#1f7a52; --a-soft:#e1f1e8; --b:#a56a00; --b-soft:#f8ecd3; --c:#8a8380; --c-soft:#ece9e6;
   --f-display:"Noto Serif SC","Songti SC",serif;
   --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
@@ -19,15 +25,20 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#141212; --surface:#1d1a1a; --ink:#efebe8; --muted:#a39b97; --line:#332e2d;
-  --accent:#e2574d; --accent-soft:#3a1d1b; --blue:#6f9cf0; --stage:#171515;
+  --accent:#e3b341; --accent-soft:#3a2f14; --blue:#6f9cf0; --stage:#171515;
   --a:#5cc792; --a-soft:#173326; --b:#e0a83a; --b-soft:#3a2c12; --c:#a39b97; --c-soft:#2a2625; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#141212; --surface:#1d1a1a; --ink:#efebe8; --muted:#a39b97; --line:#332e2d;
-  --accent:#e2574d; --accent-soft:#3a1d1b; --blue:#6f9cf0; --stage:#171515;
+  --accent:#e3b341; --accent-soft:#3a2f14; --blue:#6f9cf0; --stage:#171515;
   --a:#5cc792; --a-soft:#173326; --b:#e0a83a; --b-soft:#3a2c12; --c:#a39b97; --c-soft:#2a2625; color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6}
 .wrap{max-width:860px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
-header{display:flex;flex-direction:column;gap:6px;border-bottom:3px solid var(--accent);padding-bottom:14px}
+header{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;background:#000;border-radius:14px;padding:16px 18px;border-bottom:3px solid #d4a22a}
+.logo{height:76px;width:auto;display:block;flex:none}
+.htext{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 12em}
+header .eyebrow{color:#e6b84a}
+header h1{color:#f4d27a}
+@media (max-width:480px){.logo{height:60px}}
 .eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700}
 h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,7vw,40px);line-height:1.15;margin:0;text-wrap:balance}
 .sub{color:var(--muted);margin:0;max-width:60ch}
@@ -134,6 +145,8 @@ h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,7vw,40px);l
 
 <div class="wrap">
   <header>
+    <img class="logo" src="logo.jpg" alt="UTAR Kampar Wushu Club 金宝优大武术团" width="124" height="76">
+    <div class="htext">
     <div class="eyebrow" id="eyebrow">UTAR 散打基础 MANUAL</div>
     <h1 id="h1">散打技术库</h1>
     <div class="modes" style="display:none" role="group" aria-label="视图">
@@ -141,6 +154,7 @@ h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,7vw,40px);l
       <button class="chip" type="button" id="mode-coach">教练（素材库）</button>
     </div>
     <p class="sub" id="subCoach" hidden>从 Boxing、MMA、BJJ 里练过的动作，按散打规则重新评级。A 直接能用，B 需要改，C 不适用；标"训"的是体能和专项训练方法。每条附示范视频链接，点开会在新页面播放。</p>
+    </div>
   </header>
 
   <p class="sub" id="subManual">按章节一步步练：站架、步法、拳法、腿法、摔法。每章标「关卡」的核心动作全部达到「会用」，才进入下一章；其他动作可以边学下一章边补。体能与专项训练全程同步进行。</p>
@@ -435,7 +449,7 @@ function render(){
   document.getElementById("coachUI").hidden=manual;document.getElementById("subCoach").hidden=manual;
   document.getElementById("subManual").hidden=!manual;document.getElementById("chapters").hidden=!manual;
   document.getElementById("h1").textContent=manual?"散打基础训练手册":"散打技术库";
-  document.getElementById("eyebrow").textContent=manual?"UTAR 散打 · 新人手册":"UTAR 散打 · 教练素材库";
+  document.getElementById("eyebrow").textContent=manual?"金宝优大武术团 · 散打新人手册":"UTAR 散打 · 教练素材库";
   if(manual){renderManual();return;}
   const by=r=>rows.filter(x=>x.rating===r).length;
   document.getElementById("tAll").textContent=rows.length;
@@ -525,12 +539,12 @@ function applyLive(T){
   const status=document.getElementById("status"),foot=document.getElementById("foot");
   try{const d=await (await fetch("data.json",{cache:"no-cache"})).json();rows=d.techniques.sort((a,b)=>a.n-b.n);levels=d.levels;render();}
   catch(e){status.textContent="手册载入失败，请稍后刷新。";}
-  foot.textContent="UTAR 武术散打队 · 新人基础训练手册";
+  foot.textContent="金宝优大武术团 UTAR Kampar Wushu Club · 新人基础训练手册";
   if(!PUB)return;
   const T={};
   await Promise.all(Object.entries(GID).map(async([k,g])=>{try{T[k]=await csv(g);}catch(e){}}));
   if(!Object.keys(T).length)return;
-  try{applyLive(T);render();foot.textContent="UTAR 武术散打队 · 新人基础训练手册 · 内容已和教练的内容表同步";}catch(e){console.error(e);}
+  try{applyLive(T);render();foot.textContent="金宝优大武术团 UTAR Kampar Wushu Club · 新人基础训练手册 · 内容已和教练的内容表同步";}catch(e){console.error(e);}
 })();
 </script>
 </body>
