@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="UTAR 武术散打队新人基础训练手册：规则、步法、拳法、腿法、摔法、体能与专项。">
+<title>UTAR 散打基础训练手册</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a training-log ledger — tally strip on top, filter rails, then one card per technique like an index card in a coach's box; cards with motion open an inline animated diagram */
+:root{
+  --bg:#f5f3f0; --surface:#ffffff; --ink:#1c1a1a; --muted:#6b6461; --line:#e2ddd8;
+  --accent:#b3261e; --accent-soft:#f6e3e1; --blue:#2453a6; --stage:#faf8f6;
+  --a:#1f7a52; --a-soft:#e1f1e8; --b:#a56a00; --b-soft:#f8ecd3; --c:#8a8380; --c-soft:#ece9e6;
+  --f-display:"Noto Serif SC","Songti SC",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141212; --surface:#1d1a1a; --ink:#efebe8; --muted:#a39b97; --line:#332e2d;
+  --accent:#e2574d; --accent-soft:#3a1d1b; --blue:#6f9cf0; --stage:#171515;
+  --a:#5cc792; --a-soft:#173326; --b:#e0a83a; --b-soft:#3a2c12; --c:#a39b97; --c-soft:#2a2625; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141212; --surface:#1d1a1a; --ink:#efebe8; --muted:#a39b97; --line:#332e2d;
+  --accent:#e2574d; --accent-soft:#3a1d1b; --blue:#6f9cf0; --stage:#171515;
+  --a:#5cc792; --a-soft:#173326; --b:#e0a83a; --b-soft:#3a2c12; --c:#a39b97; --c-soft:#2a2625; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+header{display:flex;flex-direction:column;gap:6px;border-bottom:3px solid var(--accent);padding-bottom:14px}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700}
+h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,7vw,40px);line-height:1.15;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0;max-width:60ch}
+.tally{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tally div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column}
+.tally b{font-family:var(--f-mono);font-size:22px;font-variant-numeric:tabular-nums}
+.tally span{font-size:12px;color:var(--muted)}
+.tally .ta b{color:var(--a)} .tally .tb b{color:var(--b)} .tally .tc b{color:var(--c)}
+.filters{display:flex;flex-direction:column;gap:10px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row label{font-size:12px;color:var(--muted);width:3.5em;flex:none}
+.chip{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.count{font-size:13px;color:var(--muted)}
+.list{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;min-width:0}
+.grade{grid-row:span 3;width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:22px}
+.g训{background:var(--accent-soft);color:var(--accent)}
+.gA{background:var(--a-soft);color:var(--a)} .gB{background:var(--b-soft);color:var(--b)} .gC{background:var(--c-soft);color:var(--c)}
+.title{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;min-width:0}
+.num{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.title h2{font-family:var(--f-display);font-size:18px;margin:0;font-weight:700}
+.en{font-size:13px;color:var(--muted)}
+.meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.tag{font-size:12px;padding:1px 8px;border-radius:4px;background:var(--bg);color:var(--muted)}
+.tag.src{background:var(--accent-soft);color:var(--accent)}
+.btn{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:4px;padding:1px 10px;cursor:pointer}
+.btn[aria-expanded="true"],.btn.on{background:var(--accent);color:var(--surface)}
+.body{grid-column:2;display:flex;flex-direction:column;gap:6px;min-width:0}
+.body p{margin:0}
+.body .k{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin-right:6px}
+.motion{grid-column:1/-1;margin-top:8px;border:1px solid var(--line);border-radius:8px;background:var(--stage);padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.motion svg{width:100%;height:auto;display:block;max-height:300px}
+.mbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.step{font-family:var(--f-display);font-weight:700;font-size:15px;flex:1;min-width:10em}
+.steps{display:flex;gap:6px;flex-wrap:wrap}
+.steps .chip{font-size:12px;padding:2px 10px}
+.legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.vids{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.vids a{color:var(--accent);font-size:13px;font-weight:500;text-underline-offset:3px;overflow-wrap:anywhere}
+.vids a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.modes{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.chapters{display:flex;gap:8px;flex-wrap:wrap}
+.chapters .chip{font-size:14px;padding:6px 14px}
+.chhead{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.chhead h2{font-family:var(--f-display);font-size:22px;margin:0}
+.chhead p{margin:0;color:var(--muted)}
+.gate{font-size:14px}
+.gate b{color:var(--accent)}
+.ord{grid-row:span 3;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-display);font-weight:900;font-size:18px;background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+.ord.core{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+.tag.core{background:var(--accent);color:var(--surface);font-weight:700}
+.body ol,.body ul{margin:2px 0 0;padding-left:1.4em;display:flex;flex-direction:column;gap:2px}
+.std{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:2px}
+.std div{background:var(--bg);border-radius:6px;padding:8px 10px;font-size:13px;min-width:0}
+.std b{display:block;font-size:12px;color:var(--accent);letter-spacing:.06em}
+.pre{display:flex;gap:6px;flex-wrap:wrap;align-items:baseline}
+@media (max-width:480px){.std{grid-template-columns:1fr}.ord{grid-row:auto;width:34px;height:34px;font-size:16px}}
+.lvnav{display:flex;gap:8px;flex-wrap:wrap}
+.lvnav .chip{font-size:14px;padding:6px 14px}
+.fsec{font-family:var(--f-display);font-size:20px;margin:10px 0 0;padding-bottom:4px;border-bottom:2px solid var(--line)}
+.fcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.fcard h3{font-family:var(--f-display);font-size:18px;margin:0}
+.fcard .why{margin:0;padding-left:1.2em;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:2px}
+.tbl{overflow-x:auto;max-width:100%}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td:first-child{font-weight:700;min-width:5.5em}
+.tbl td.dose{white-space:nowrap;font-variant-numeric:tabular-nums}
+.lvhead{background:var(--ink);color:var(--bg);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.lvhead h2{font-family:var(--f-display);font-size:22px;margin:0}
+.lvhead p{margin:0;opacity:.85}
+.fcard.std{border-left:4px solid var(--accent)}
+.exl{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ex{border-bottom:1px solid var(--line)}
+.ex:last-child{border-bottom:none}
+.ex summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 12px;align-items:baseline}
+.ex summary::-webkit-details-marker{display:none}
+.ex summary::before{content:"＋";grid-row:span 2;color:var(--accent);font-weight:700;margin-right:2px;display:none}
+.ex .exn{min-width:0}
+.ex .exn b::before{content:"▸ ";color:var(--accent)}
+.ex[open] .exn b::before{content:"▾ "}
+.ex .dose{font-variant-numeric:tabular-nums;font-size:14px;white-space:nowrap;text-align:right}
+.ex .tipline{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.ex[open] .tipline{display:none}
+.ex summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.ex[open]{background:var(--bg)}
+.ex>p.tip{margin:0 12px 4px;font-size:13px;color:var(--accent);font-weight:700}
+.ex ol{margin:0 12px 8px;padding-left:1.4em;display:flex;flex-direction:column;gap:2px;font-size:14px}
+.ex .vlink{display:inline-block;margin:0 12px 12px;color:var(--accent);font-weight:700;font-size:14px;text-underline-offset:3px}
+@media (max-width:480px){.tbl td.dose{white-space:normal}}
+.empty,.note{color:var(--muted);text-align:center;padding:32px 12px;border:1px dashed var(--line);border-radius:10px}
+@media (max-width:480px){.tally{grid-template-columns:repeat(2,1fr)}.card{grid-template-columns:1fr}.grade{grid-row:auto;width:34px;height:34px;font-size:18px}.body{grid-column:1}}
+@media (prefers-reduced-motion:reduce){.motion{scroll-behavior:auto}}
+.foot{max-width:860px;margin:0 auto;padding:0 16px 32px;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow" id="eyebrow">UTAR 散打基础 MANUAL</div>
+    <h1 id="h1">散打技术库</h1>
+    <div class="modes" style="display:none" role="group" aria-label="视图">
+      <button class="chip" type="button" id="mode-manual">手册（新人）</button>
+      <button class="chip" type="button" id="mode-coach">教练（素材库）</button>
+    </div>
+    <p class="sub" id="subCoach" hidden>从 Boxing、MMA、BJJ 里练过的动作，按散打规则重新评级。A 直接能用，B 需要改，C 不适用；标"训"的是体能和专项训练方法。每条附示范视频链接，点开会在新页面播放。</p>
+  </header>
+
+  <p class="sub" id="subManual">按章节一步步练：站架、步法、拳法、腿法、摔法。每章标「关卡」的核心动作全部达到「会用」，才进入下一章；其他动作可以边学下一章边补。体能与专项训练全程同步进行。</p>
+  <nav class="chapters" id="chapters" aria-label="章节"></nav>
+  <div id="coachUI" hidden>
+  <section class="tally" aria-label="评级统计">
+    <div><b id="tAll">–</b><span>全部</span></div>
+    <div class="ta"><b id="tA">–</b><span>A 直接用</span></div>
+    <div class="tb"><b id="tB">–</b><span>B 需要改</span></div>
+    <div class="tc"><b id="tC">–</b><span>C 不适用</span></div>
+  </section>
+
+  <section class="filters" aria-label="筛选">
+    <div class="row" id="fCat"><label>类别</label></div>
+    <div class="row" id="fRate"><label>评级</label></div>
+    <div class="row" id="fSrc"><label>来源</label></div>
+    <div class="count" id="count"></div>
+  </section>
+  </div>
+
+  <section class="list" id="list">
+    <div class="note" id="status">正在载入手册…</div>
+  </section>
+</div>
+
+<footer class="foot" id="foot"></footer>
+<script>
+const CATS=["全部","脚步","拳法","腿法","摔法","防守","组合","体能","专项"];
+const RATES=["全部","A","B","C"];
+const SRCS=["全部","Boxing","MMA","BJJ","网上","建议"];
+const state={cat:"全部",rate:"全部",src:"全部",open:null,mode:"manual",ch:7,lv:1};
+let levels={};
+try{const l=parseInt(localStorage.getItem("lv"),10);if(l>=1&&l<=3)state.lv=l;}catch(e){}
+try{const c=parseInt(localStorage.getItem("ch"),10);if(c>=0&&c<=9)state.ch=c;}catch(e){}
+const CHAPTERS=[
+ {name:"第 0 章　站架",short:"0 站架",intro:"所有动作的起点。站架不稳，后面每一章都会出问题。"},
+ {name:"第 1 章　步法",short:"1 步法",intro:"先学会移动，再学打。步法贯穿之后所有章节，学拳腿摔时也要一直练。"},
+ {name:"第 2 章　拳法",short:"2 拳法",intro:"先单拳、再组合，同时学基本防守。散打里拳得 1 分，主要用来控制距离和给腿法、摔法开路。"},
+ {name:"第 3 章　腿法",short:"3 腿法",intro:"所有腿法从提膝开始。散打里腿慢会被接腿摔，所以收腿和出腿一样重要。"},
+ {name:"第 4 章　摔法",short:"4 摔法",intro:"先学入步和防摔，再学摔。散打摔法膝盖不着地，抱住后 2 秒内要摔成，自己要保持站立才得 2 分。"},
+ {name:"体能与专项",short:"体能与专项",intro:"和技术章节同时进行。先选你现在的级别，下面只显示这一级要练的内容和晋级标准。"},
+ {name:"进阶拳法　组合拳",short:"2+ 进阶拳法",intro:"拳法章的关卡过了再学，可以和腿法、摔法同时练。拳号：1 Jab、2 Cross、3 前手 Hook、4 后手 Hook、5 前手 Uppercut、6 后手 Uppercut。散打里组合打完要接结尾：低扫、出角或防摔准备，不要停在近距离。"},
+ {name:"比赛规则",short:"规则",intro:"先懂规则，才知道为什么散打的动作要这样改。这里是新人需要知道的部分，按 IWUF 2024 规则整理。"},
+ {name:"术语表",short:"术语",intro:"手册里中英文混用，看不懂的词在这里查。"},
+ {name:"一堂课流程",short:"一堂课",intro:"一堂训练课按什么顺序、每段多久、做什么。教练备课和新人了解训练都看这里。"}];
+function setMode(m){state.mode=m;try{localStorage.setItem("mode",m);}catch(e){}render();}
+document.getElementById("mode-manual").addEventListener("click",()=>setMode("manual"));
+document.getElementById("mode-coach").addEventListener("click",()=>setMode("coach"));
+function buildChapters(){const nav=document.getElementById("chapters");nav.replaceChildren();
+  [7,9,0,1,2,6,3,4,5,8].forEach(i=>{const c=CHAPTERS[i];const b=el("button","chip",c.short);b.type="button";b.id="ch-"+i;b.setAttribute("aria-pressed",String(state.ch===i));
+    b.addEventListener("click",()=>{state.ch=i;state.open=null;try{localStorage.setItem("ch",String(i));}catch(e){}render();});nav.appendChild(b);});}
+let rows=[];
+
+function chips(id,opts,key){
+  const box=document.getElementById(id);
+  opts.forEach(o=>{
+    const b=document.createElement("button");
+    b.className="chip";b.type="button";b.textContent=o;b.id=id+"-"+o;
+    b.setAttribute("aria-pressed",String(state[key]===o));
+    b.addEventListener("click",()=>{state[key]=o;
+      box.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(c.textContent===o)));
+      render();});
+    box.appendChild(b);
+  });
+}
+chips("fCat",CATS,"cat");chips("fRate",RATES,"rate");chips("fSrc",SRCS,"src");
+
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+
+/* ---------- motion engine ---------- */
+const NS="http://www.w3.org/2000/svg";
+function sv(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function mix(a,b,t){
+  if(typeof a==="number")return a+(b-a)*t;
+  if(Array.isArray(a))return a.map((v,i)=>mix(v,b[i],t));
+  if(a&&typeof a==="object"){const o={};for(const k in a)o[k]=(b&&k in b)?mix(a[k],b[k],t):a[k];return o;}
+  return a;
+}
+function sample(keys,time){
+  let i=0;while(i<keys.length-1&&keys[i+1].t<=time)i++;
+  const k=keys[i],n=keys[i+1];
+  if(!n)return{f:k,label:k.label,idx:i};
+  const t=ease((time-k.t)/(n.t-k.t));
+  return{f:mix(k,n,t),label:n.label,idx:i+1};
+}
+const RAD=Math.PI/180;
+/* side view, y up. angles: 0 = straight down, + = toward facing direction */
+function figure(p,dir){
+  const v=(ang,len)=>[dir*Math.sin(ang*RAD)*len,-Math.cos(ang*RAD)*len];
+  const add=(a,b)=>[a[0]+b[0],a[1]+b[1]];
+  const hip=[p.x,0];
+  const tv=[dir*Math.sin((p.torso||0)*RAD),Math.cos((p.torso||0)*RAD)];
+  const neck=[hip[0]+tv[0]*50,hip[1]+tv[1]*50];
+  const sh=[hip[0]+tv[0]*45,hip[1]+tv[1]*45];
+  const head=[hip[0]+tv[0]*62,hip[1]+tv[1]*62];
+  const leg=(th,sh_)=>{const k=add(hip,v(th,40));return[k,add(k,v(th+sh_,40))];};
+  const arm=(ua,fa)=>{const e=add(sh,v((p.torso||0)+ua,27));return[e,add(e,v((p.torso||0)+ua+fa,25))];};
+  const fl=leg(p.ft,p.fs),bl=leg(p.bt,p.bs),fa=arm(p.fua,p.ffa),ba=arm(p.bua,p.bfa);
+  const pts=[fl[0],fl[1],bl[0],bl[1]];
+  const lift=p.air?0:-Math.min(...pts.map(q=>q[1]));
+  const L=q=>[q[0],q[1]+lift];
+  return{hip:L(hip),neck:L(neck),sh:L(sh),head:L(head),fl:fl.map(L),bl:bl.map(L),fa:fa.map(L),ba:ba.map(L)};
+}
+const GY=150,toS=q=>[q[0],GY-q[1]];
+function drawFigure(g,f,color,ghost){
+  const op=ghost?.35:1;
+  const line=(a,b,w,o)=>{const A=toS(a),B=toS(b);sv("line",{x1:A[0],y1:A[1],x2:B[0],y2:B[1],stroke:color,"stroke-width":w,"stroke-linecap":"round","stroke-opacity":o*op},g);};
+  const limb=(root,seg,o)=>{line(root,seg[0],6,o);line(seg[0],seg[1],5.5,o);};
+  limb(f.sh,f.ba,.45);limb(f.hip,f.bl,.45);
+  line(f.hip,f.neck,7,1);
+  const H=toS(f.head);sv("circle",{cx:H[0],cy:H[1],r:9.5,fill:color,"fill-opacity":op},g);
+  limb(f.hip,f.fl,1);limb(f.sh,f.fa,1);
+}
+function drawSide(svg,frame){
+  svg.replaceChildren();
+  svg.setAttribute("viewBox","-110 -5 300 168");
+  sv("line",{x1:-110,y1:GY,x2:190,y2:GY,stroke:"var(--line)","stroke-width":2},svg);
+  for(let x=-100;x<=180;x+=20)sv("line",{x1:x,y1:GY,x2:x-6,y2:GY+6,stroke:"var(--line)","stroke-width":1},svg);
+  const g=sv("g",{},svg);
+  if(frame.b)drawFigure(g,figure(frame.b,-1),"var(--blue)",true);
+  if(frame.a)drawFigure(g,figure(frame.a,1),"var(--accent)",false);
+}
+function foot(g,f,color,front,txt){
+  const [x,y,ang]=f;
+  const e=sv("g",{transform:`translate(${x} ${-y}) rotate(${-ang})`},g);
+  sv("ellipse",{cx:0,cy:0,rx:10,ry:5,fill:color,"fill-opacity":front?1:.55},e);
+  sv("circle",{cx:7,cy:0,r:2,fill:"var(--stage)"},e);
+  const t=sv("text",{x:x,y:-y-9,"text-anchor":"middle","font-size":7,fill:"var(--muted)","font-family":"var(--f-body)"},g);t.textContent=txt;
+}
+function stance(g,s,color,face,ghost){
+  const op=ghost?.4:1;const gg=sv("g",{opacity:op},g);
+  const mx=(s.lf[0]+s.rf[0])/2,my=(s.lf[1]+s.rf[1])/2;
+  sv("line",{x1:s.lf[0],y1:-s.lf[1],x2:s.rf[0],y2:-s.rf[1],stroke:color,"stroke-width":1,"stroke-dasharray":"2 2"},gg);
+  const ang=(s.face!=null?s.face:face)*RAD;
+  sv("line",{x1:mx,y1:-my,x2:mx+Math.cos(ang)*16,y2:-my-Math.sin(ang)*16,stroke:color,"stroke-width":2,"marker-end":"url(#arw)"},gg);
+  foot(gg,s.lf,color,s.front==="l","左");foot(gg,s.rf,color,s.front!=="l","右");
+}
+function drawTop(svg,frame,m){
+  svg.replaceChildren();
+  svg.setAttribute("viewBox",m.box||"-90 -70 260 140");
+  const d=sv("defs",{},svg);const mk=sv("marker",{id:"arw",viewBox:"0 0 6 6",refX:5,refY:3,markerWidth:5,markerHeight:5,orient:"auto"},d);
+  sv("path",{d:"M0 0L6 3L0 6z",fill:"var(--muted)"},mk);
+  for(let x=-80;x<=160;x+=20)sv("line",{x1:x,y1:-70,x2:x,y2:70,stroke:"var(--line)","stroke-width":.5},svg);
+  for(let y=-60;y<=60;y+=20)sv("line",{x1:-90,y1:y,x2:170,y2:y,stroke:"var(--line)","stroke-width":.5},svg);
+  (m.lines||[]).forEach(l=>{sv("line",{x1:l[0],y1:-l[1],x2:l[2],y2:-l[3],stroke:"var(--blue)","stroke-width":2,"stroke-dasharray":"5 4","stroke-opacity":.6,"marker-end":"url(#arw)"},svg);
+    if(l[4]){const t=sv("text",{x:(l[0]+l[2])/2,y:-(l[1]+l[3])/2-5,"text-anchor":"middle","font-size":7,fill:"var(--blue)"},svg);t.textContent=l[4];}});
+  const g=sv("g",{},svg);
+  if(frame.b)stance(g,frame.b,"var(--blue)",180,true);
+  if(frame.a)stance(g,frame.a,"var(--accent)",0,false);
+}
+
+let anim=null;
+function stopAnim(){if(anim){cancelAnimationFrame(anim.raf);anim=null;}}
+function buildMotion(r){
+  const m=r.motion;const box=el("div","motion");
+  const bar=el("div","mbar");
+  const play=el("button","btn on","暂停");play.type="button";play.id="mplay-"+r.n;
+  const spd=el("button","btn","0.5×");spd.type="button";spd.id="mspd-"+r.n;
+  const step=el("div","step","");
+  bar.append(step,play,spd);
+  const svg=sv("svg",{role:"img","aria-label":r.name+" 动作示意"});
+  const steps=el("div","steps");
+  const labels=[];m.keys.forEach((k,i)=>{if(k.label&&(i===0||k.label!==m.keys[i-1].label))labels.push({i,label:k.label});});
+  const stepBtns=labels.map((s,j)=>{const b=el("button","chip",(j+1)+". "+s.label);b.type="button";b.id=`mstep-${r.n}-${j}`;steps.appendChild(b);return b;});
+  const lg=el("div","legend");
+  const l1=el("span");l1.appendChild(el("i"));l1.firstChild.style.background="var(--accent)";l1.append(m.aName||"你");
+  lg.appendChild(l1);
+  if(m.keys.some(k=>k.b)){const l2=el("span");l2.appendChild(el("i"));l2.firstChild.style.background="var(--blue)";l2.append(m.bName||"对手");lg.appendChild(l2);}
+  lg.appendChild(el("span",null,m.view==="top"?"俯视图：椭圆为脚印，圆点是脚尖，箭头是身体朝向":"侧视图：深色为前侧手脚，浅色为后侧"));
+  box.append(bar,svg,steps,lg);
+  if(m.note)box.appendChild(el("div","legend",m.note));
+  const total=m.keys[m.keys.length-1].t;
+  const st={t:0,playing:!window.matchMedia("(prefers-reduced-motion: reduce)").matches,speed:1,last:null};
+  const paint=()=>{const s=sample(m.keys,st.t);(m.view==="top"?drawTop:drawSide)(svg,s.f,m);step.textContent=s.label||"";
+    const cur=labels.filter(l=>l.i<=s.idx).length-1;stepBtns.forEach((b,j)=>b.setAttribute("aria-pressed",String(j===cur)));};
+  const loop=ts=>{if(!anim)return;if(st.playing){if(st.last!=null)st.t=(st.t+(ts-st.last)/1000*st.speed)%total;st.last=ts;}else st.last=null;paint();anim.raf=requestAnimationFrame(loop);};
+  play.textContent=st.playing?"暂停":"播放";play.classList.toggle("on",st.playing);
+  play.addEventListener("click",()=>{st.playing=!st.playing;play.textContent=st.playing?"暂停":"播放";play.classList.toggle("on",st.playing);});
+  spd.addEventListener("click",()=>{st.speed=st.speed===1?.5:1;spd.classList.toggle("on",st.speed===.5);});
+  stepBtns.forEach((b,j)=>b.addEventListener("click",()=>{st.t=Math.max(0,m.keys[labels[j].i].t-0.001);st.playing=false;play.textContent="播放";play.classList.remove("on");}));
+  stopAnim();anim={raf:0};paint();anim.raf=requestAnimationFrame(loop);
+  return box;
+}
+
+function videoP(r){const p=el("p","vids");p.appendChild(el("span","k","视频"));r.videos.forEach(v=>{if(!/^https:\/\/(www\.)?youtube\.com\//.test(v.url))return;const a=el("a",null,"▶ "+v.title);a.href=v.url;a.target="_blank";a.rel="noopener";p.appendChild(a);});return p;}
+function table(cols,rows,doseCol){const w=el("div","tbl");const t=el("table");const h=el("tr");cols.forEach(c=>h.appendChild(el("th",null,c)));const th=el("thead");th.appendChild(h);t.appendChild(th);const tb=el("tbody");
+  rows.forEach(r=>{const tr=el("tr");r.forEach((v,i)=>tr.appendChild(el("td",i===doseCol?"dose":null,v||"")));tb.appendChild(tr);});t.appendChild(tb);w.appendChild(t);return w;}
+function exList(rows){
+  const ex={};((levels.exercises&&levels.exercises.items)||[]).forEach(e=>{ex[e.name]=e;});
+  const box=el("div","exl");
+  rows.forEach(r=>{const [name,dose,tip]=r;const e=ex[name];
+    const d=el("details","ex");const s=el("summary");
+    const t=el("span","exn");t.appendChild(el("b",null,name));if(e&&e.en&&e.en!==name)t.appendChild(el("span","en"," "+e.en));s.appendChild(t);
+    s.appendChild(el("span","dose",dose||""));d.appendChild(s);
+    if(tip)d.appendChild(el("p","tip",tip));
+    if(e){if(e.how&&e.how.length){const o=el("ol");e.how.forEach(x=>o.appendChild(el("li",null,x)));d.appendChild(o);}
+      if(e.video&&/^https:\/\/(www\.)?youtube\.com\//.test(e.video)){const a=el("a","vlink","▶ 看示范影片（YouTube）");a.href=e.video;a.target="_blank";a.rel="noopener";d.appendChild(a);}}
+    else d.appendChild(el("p","tip","还没有动作说明。"));
+    if(tip){const tt=el("span","tipline",tip);s.appendChild(tt);}
+    box.appendChild(d);});
+  return box;}
+function renderRules(list,key){
+  const R=levels[key];
+  if(!R){list.appendChild(el("div","empty","内容载入中。"));return;}
+  (R.sections||[]).forEach((sec,i)=>{
+    list.appendChild(el("h2","fsec",sec.title));
+    const c=el("article","fcard"+(i===0?" std":""));
+    if(sec.intro)c.appendChild(el("p",null,sec.intro));
+    if(sec.cols.length===1){const o=el("ol");o.style.margin="0";o.style.paddingLeft="1.4em";o.style.display="flex";o.style.flexDirection="column";o.style.gap="4px";sec.rows.forEach(r=>o.appendChild(el("li",null,r[0])));c.appendChild(o);}
+    else c.appendChild(table(sec.cols,sec.rows,-1));
+    list.appendChild(c);});
+  if(R.source)list.appendChild(el("p","count",R.source));
+}
+function renderFitness(list,items){
+  const LN=["","一级","二级","三级"];
+  const nav=el("nav","lvnav");nav.setAttribute("aria-label","级别");
+  [1,2,3].forEach(n=>{const lv=levels["l"+n];const b=el("button","chip",lv?lv.name.replace("　"," "):LN[n]);b.type="button";b.id="lv-"+n;b.setAttribute("aria-pressed",String(state.lv===n));
+    b.addEventListener("click",()=>{state.lv=n;try{localStorage.setItem("lv",String(n));}catch(e){}render();});nav.appendChild(b);});
+  list.appendChild(nav);
+  const lv=levels["l"+state.lv];
+  if(lv){const h=el("section","lvhead");h.appendChild(el("h2",null,lv.name));h.appendChild(el("p",null,"时长参考："+lv.dur));h.appendChild(el("p",null,lv.goal));list.appendChild(h);}
+  const key=LN[state.lv];
+  ["体能","专项"].forEach(g=>{
+    const its=items.filter(r=>r.group===g).sort((a,b)=>(a.ord||a.n)-(b.ord||b.n));if(!its.length)return;
+    list.appendChild(el("h2","fsec",g));
+    its.forEach(r=>{const c=el("article","fcard");c.appendChild(el("h3",null,r.name));
+      if(r.freq){const m=el("div","meta");m.appendChild(el("span","tag",r.freq));c.appendChild(m);}
+      const rows=(r.plan&&r.plan[key])||[];
+      if(rows.length){c.appendChild(el("span","k","点动作名称看做法和示范"));c.appendChild(exList(rows));}
+      if(r.why&&r.why.length){c.appendChild(el("span","k","为什么这样练"));const u=el("ul","why");r.why.forEach(x=>u.appendChild(el("li",null,x)));c.appendChild(u);}
+      list.appendChild(c);});
+  });
+  if(lv){
+    list.appendChild(el("h2","fsec",lv.stdTitle||"晋级标准"));
+    const c=el("article","fcard std");c.appendChild(table(["项目","标准"],lv.std||[],-1));
+    if(state.lv<3)c.appendChild(el("p",null,"本级全部达标，并由教练确认动作质量，才进入下一级。时长只是参考，达标比时间重要。"));
+    list.appendChild(c);
+    if(lv.period){list.appendChild(el("h2","fsec","按赛期调整"));const p=el("article","fcard");p.appendChild(table(["时期","调整"],lv.period,-1));list.appendChild(p);}
+    if(lv.sample){list.appendChild(el("h2","fsec","示例课：上肢爆发 + 力量日"));const p=el("article","fcard");p.appendChild(table(["#","内容","组 × 次","休息"],lv.sample,2));p.appendChild(el("p",null,"顺序就是原则 1：先爆发，再力量，最后核心和体能。重量按个人程度选。"));list.appendChild(p);}
+  }
+  const ru=levels.rules;
+  if(ru&&ru.items){list.appendChild(el("h2","fsec","安排原则（所有级别）"));const c=el("article","fcard");const o=el("ol");o.style.margin="0";o.style.paddingLeft="1.4em";ru.items.forEach(x=>o.appendChild(el("li",null,x)));c.appendChild(o);list.appendChild(c);}
+}
+function renderManual(){
+  stopAnim();buildChapters();
+  const list=document.getElementById("list");list.replaceChildren();
+  if(!rows.length){list.appendChild(el("div","empty","手册内容载入中。"));return;}
+  const ch=CHAPTERS[state.ch];
+  const items=rows.filter(r=>r.ch===state.ch).sort((a,b)=>(a.ord||a.n)-(b.ord||b.n));
+  const head=el("section","chhead");head.appendChild(el("h2",null,ch.name));head.appendChild(el("p",null,ch.intro));
+  const core=items.filter(r=>r.core);
+  if(core.length){const g=el("p","gate");g.appendChild(el("b",null,"本章关卡："));g.append(core.map(r=>r.name).join("、")+"。全部达到「会用」才进入下一章。");head.appendChild(g);}
+  list.appendChild(head);
+  if(state.ch===5){renderFitness(list,items);return;}
+  if(state.ch===7){renderRules(list,"sanda_rules");return;}
+  if(state.ch===8){renderRules(list,"glossary");return;}
+  if(state.ch===9){renderRules(list,"class_flow");return;}
+  if(!items.length){list.appendChild(el("div","empty","这一章还没有内容。"));return;}
+  items.forEach((r,i)=>{
+    const c=el("article","card");
+    const train=r.rating==="训";
+    c.appendChild(el("div","ord"+(r.core?" core":""),String(i+1)));
+    const t=el("div","title");t.appendChild(el("h2",null,r.name));if(r.en)t.appendChild(el("span","en",r.en));c.appendChild(t);
+    const m=el("div","meta");
+    if(r.core)m.appendChild(el("span","tag core","关卡"));
+    if(train&&r.level)m.appendChild(el("span","tag",r.level));
+    if(r.motion&&r.motion.keys){const b=el("button","btn","看动作");b.type="button";b.id="mbtn-"+r.n;b.setAttribute("aria-expanded",String(state.open===r.n));
+      b.addEventListener("click",()=>{state.open=state.open===r.n?null:r.n;render();});m.appendChild(b);}
+    c.appendChild(m);
+    const b=el("div","body");
+    const kv=(k,v)=>{const p=el("p");p.appendChild(el("span","k",k));p.append(v);b.appendChild(p);};
+    if(train){if(r.points)kv("做法",r.points);if(r.fix)kv("原因",r.fix);}
+    else{
+      if(r.use)kv("什么时候用",r.use);
+      if(r.steps&&r.steps.length){b.appendChild(el("span","k","动作要点"));const o=el("ol");r.steps.forEach(x=>o.appendChild(el("li",null,x)));b.appendChild(o);}
+      if(r.errs&&r.errs.length){b.appendChild(el("span","k","常见错误"));const u=el("ul");r.errs.forEach(x=>u.appendChild(el("li",null,x)));b.appendChild(u);}
+      if(r.std&&r.std.length===3){b.appendChild(el("span","k","达标标准"));const g=el("div","std");["会做","会用","实战"].forEach((h,j)=>{const d=el("div");d.appendChild(el("b",null,h));d.append(r.std[j]);g.appendChild(d);});b.appendChild(g);}
+      if(r.pre&&r.pre.length){const p=el("p","pre");p.appendChild(el("span","k","先学"));r.pre.forEach(x=>p.appendChild(el("span","tag",x)));b.appendChild(p);}
+    }
+    if(r.videos&&r.videos.length)b.appendChild(videoP(r));
+    c.appendChild(b);
+    if(state.open===r.n&&r.motion&&r.motion.keys)c.appendChild(buildMotion(r));
+    list.appendChild(c);
+  });
+}
+function render(){
+  const manual=state.mode==="manual";
+  document.getElementById("mode-manual").setAttribute("aria-pressed",String(manual));
+  document.getElementById("mode-coach").setAttribute("aria-pressed",String(!manual));
+  document.getElementById("coachUI").hidden=manual;document.getElementById("subCoach").hidden=manual;
+  document.getElementById("subManual").hidden=!manual;document.getElementById("chapters").hidden=!manual;
+  document.getElementById("h1").textContent=manual?"散打基础训练手册":"散打技术库";
+  document.getElementById("eyebrow").textContent=manual?"UTAR 散打 · 新人手册":"UTAR 散打 · 教练素材库";
+  if(manual){renderManual();return;}
+  const by=r=>rows.filter(x=>x.rating===r).length;
+  document.getElementById("tAll").textContent=rows.length;
+  document.getElementById("tA").textContent=by("A");
+  document.getElementById("tB").textContent=by("B");
+  document.getElementById("tC").textContent=by("C");
+  stopAnim();
+  const list=document.getElementById("list");list.replaceChildren();
+  if(!rows.length){list.appendChild(el("div","empty","还没有记录。把练过的动作告诉 Claude，它会评级后加进来。"));document.getElementById("count").textContent="";return;}
+  const shown=rows.filter(r=>(state.cat==="全部"||r.cat===state.cat)&&(state.rate==="全部"||r.rating===state.rate)&&(state.src==="全部"||r.src===state.src));
+  const nm=rows.filter(r=>r.videos&&r.videos.length).length;
+  document.getElementById("count").textContent=`显示 ${shown.length} / ${rows.length} 条 · ${nm} 条有示范视频`;
+  if(!shown.length){list.appendChild(el("div","empty","没有符合筛选的动作。"));return;}
+  shown.forEach(r=>{
+    const c=el("article","card");
+    c.appendChild(el("div","grade g"+r.rating,r.rating));
+    const t=el("div","title");
+    t.appendChild(el("span","num","#"+String(r.n).padStart(2,"0")));
+    t.appendChild(el("h2",null,r.name));
+    if(r.en)t.appendChild(el("span","en",r.en));
+    c.appendChild(t);
+    const m=el("div","meta");
+    m.appendChild(el("span","tag",r.cat));
+    m.appendChild(el("span","tag src",r.src));
+    if(r.level)m.appendChild(el("span","tag",r.level));
+    if(r.motion&&r.motion.keys){
+      const b=el("button","btn","看动作");b.type="button";b.id="mbtn-"+r.n;
+      b.setAttribute("aria-expanded",String(state.open===r.n));
+      b.addEventListener("click",()=>{state.open=state.open===r.n?null:r.n;render();});
+      m.appendChild(b);
+    }
+    c.appendChild(m);
+    const b=el("div","body");
+    if(r.points){const p=el("p");p.appendChild(el("span","k",r.rating==="训"?"做法":"要点"));p.append(r.points);b.appendChild(p);}
+    if(r.fix){const p=el("p");p.appendChild(el("span","k",r.rating==="训"?"原因":"散打"));p.append(r.fix);b.appendChild(p);}
+    if(r.videos&&r.videos.length)b.appendChild(videoP(r));
+    c.appendChild(b);
+    if(state.open===r.n&&r.motion&&r.motion.keys)c.appendChild(buildMotion(r));
+    list.appendChild(c);
+  });
+}
+
+/* ---------- data: snapshot first, then live Google Sheet (published CSV) ---------- */
+/* PUB = 「发布到网络」后得到的链接，去掉 /pubhtml 之后的部分，例如
+   https://docs.google.com/spreadsheets/d/e/2PACX-xxxx/pub  。留空就只用 data.json 快照。 */
+const PUB="";
+const GID={tech:777000001,plan:1091268160,ex:1161487657,std:322071460,sample:911398581,rules:60643919,glo:189439053,cls:1898754689};
+function parseCSV(t){const out=[];let row=[],f="",q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}
+    else if(c==='"')q=true;else if(c===','){row.push(f);f="";}
+    else if(c==='\n'){row.push(f);out.push(row);row=[];f="";}
+    else if(c!=='\r')f+=c;}
+  if(f||row.length){row.push(f);out.push(row);}return out;}
+async function csv(gid){const r=await fetch(PUB+"?gid="+gid+"&single=true&output=csv",{cache:"no-store"});
+  if(!r.ok)throw new Error(r.status);const t=await r.text();if(/^\s*</.test(t))throw new Error("not csv");return parseCSV(t).slice(1);}
+const lines=s=>(s||"").split("\n").map(x=>x.trim()).filter(Boolean);
+const GROUP={t23:"体能",t24:"体能",t28:"体能",t29:"体能",t25:"专项",t26:"专项",t27:"专项"};
+function sections(rs,colsFixed){const out=[];let cur=null;
+  rs.forEach(r=>{const [title,a,b,c]=r.map(x=>(x||"").trim());if(!title)return;
+    if(!cur||cur.title!==title){cur={title,intro:colsFixed?"":a,cols:colsFixed||b.split("|").map(x=>x.trim()),rows:[]};out.push(cur);}
+    if(colsFixed)cur.rows.push([a,b]);else cur.rows.push(c.split("|").map(x=>x.trim()));});
+  return out;}
+function applyLive(T){
+  const snap={};rows.forEach(r=>{snap[r.id]=r;});
+  if(T.tech){const nr=[];T.tech.forEach(c=>{const id=(c[0]||"").trim();if(!/^t\d+$/.test(id))return;
+    const ch=parseInt(c[1],10);if(isNaN(ch))return;const o=Object.assign({},snap[id]||{});
+    Object.assign(o,{id,n:parseInt(id.slice(1),10),ch,ord:parseFloat(c[2])||0,core:(c[3]||"").trim()==="是",name:c[4]||"",en:c[5]||"",use:c[6]||"",
+      steps:lines(c[7]),errs:lines(c[8]),std:(c[9]||c[10]||c[11])?[c[9]||"",c[10]||"",c[11]||""]:[],
+      pre:(c[12]||"").split("、").map(x=>x.trim()).filter(Boolean),
+      videos:lines(c[13]).map(l=>{const k=l.lastIndexOf("|");return k<0?null:{title:l.slice(0,k).trim(),url:l.slice(k+1).trim()};}).filter(Boolean)});
+    if(ch===5){o.rating="训";o.group=GROUP[id]||o.group||"体能";o.freq=c[14]||o.freq||"";o.points=o.freq;o.why=lines(c[15]);o.fix=c[15]||"";o.plan=o.plan||{};}
+    nr.push(o);});
+    if(nr.length)rows=nr.sort((a,b)=>a.n-b.n);}
+  if(T.plan){const P={};T.plan.forEach(c=>{const id=(c[0]||"").trim();if(!id||!c[3])return;const k=(c[2]||"").trim();
+      ((P[id]=P[id]||{})[k]=P[id][k]||[]).push([c[3].trim(),c[4]||"",c[5]||""]);});
+    rows.forEach(r=>{if(r.ch===5)r.plan=P[r.id]||{};});}
+  if(T.ex)levels.exercises={items:T.ex.filter(c=>c[0]).map(c=>({name:c[0].trim(),en:c[1]||"",how:lines(c[2]),video:(c[3]||"").trim()}))};
+  if(T.std){[1,2,3].forEach(n=>{if(levels["l"+n])levels["l"+n].std=[];});
+    const map={"一":1,"二":2,"三":3};T.std.forEach(c=>{const n=map[(c[0]||"").trim()[0]];if(n&&levels["l"+n]&&c[1])levels["l"+n].std.push([c[1],c[2]||""]);});}
+  if(T.sample&&levels.l3)levels.l3.sample=T.sample.filter(c=>c[1]).map(c=>[c[0],c[1],c[2]||"",c[3]||""]);
+  if(T.rules)levels.sanda_rules=Object.assign({},levels.sanda_rules,{sections:sections(T.rules)});
+  if(T.cls)levels.class_flow=Object.assign({},levels.class_flow,{sections:sections(T.cls)});
+  if(T.glo)levels.glossary=Object.assign({},levels.glossary,{sections:sections(T.glo,["术语","意思"])});
+}
+(async()=>{
+  const status=document.getElementById("status"),foot=document.getElementById("foot");
+  try{const d=await (await fetch("data.json",{cache:"no-cache"})).json();rows=d.techniques.sort((a,b)=>a.n-b.n);levels=d.levels;render();}
+  catch(e){status.textContent="手册载入失败，请稍后刷新。";}
+  foot.textContent="UTAR 武术散打队 · 新人基础训练手册";
+  if(!PUB)return;
+  const T={};
+  await Promise.all(Object.entries(GID).map(async([k,g])=>{try{T[k]=await csv(g);}catch(e){}}));
+  if(!Object.keys(T).length)return;
+  try{applyLive(T);render();foot.textContent="UTAR 武术散打队 · 新人基础训练手册 · 内容已和教练的内容表同步";}catch(e){console.error(e);}
+})();
+</script>
+</body>
+</html>
