@@ -159,7 +159,9 @@ h1{font-family:var(--f-display);font-weight:900;font-size:clamp(28px,7vw,40px);l
 
   <p class="sub" id="subManual">按章节一步步练：站架、步法、拳法、腿法、摔法。每章标「关卡」的核心动作全部达到「会用」，才进入下一章；其他动作可以边学下一章边补。体能与专项训练全程同步进行。</p>
   <div class="dls"><p class="dl"><a href="utar-sanda-progress.xlsx" download>⬇ 下载新人进度记录表（Excel）</a><span>记录每章关卡和体能测试，自动算出过关和晋级</span></p>
-  <p class="dl"><a href="maintenance-guide.pdf" download>⬇ 维护与交接指南（PDF）</a><span>给负责人：怎么改内容、加动作、换届交接</span></p></div>
+  <p class="dl"><a href="maintenance-guide.pdf" download>⬇ 维护与交接指南（PDF）</a><span>给负责人：怎么改内容、加动作、换届交接</span></p>
+  <p class="dl"><a href="iwuf-sanda-rules-2024.pdf" download>⬇ 武术散打规则和裁判法（IWUF 2024，PDF）</a><span>完整官方规则，中英对照</span></p>
+  <p class="dl"><a href="iwuf-sanda-rules-lecture-2024.pptx" download>⬇ 规则与裁判法讲解（PPT）</a><span>IWUF 2024 国际裁判培训班讲义，附图片说明</span></p></div>
   <nav class="chapters" id="chapters" aria-label="章节"></nav>
   <div id="coachUI" hidden>
   <section class="tally" aria-label="评级统计">
@@ -370,6 +372,7 @@ function renderRules(list,key){
     else c.appendChild(table(sec.cols,sec.rows,-1));
     list.appendChild(c);});
   if(R.source)list.appendChild(el("p","count",R.source));
+  if(key==="sanda_rules"){const p=el("p","dl");const a=el("a",null,"⬇ 下载完整规则：武术散打规则和裁判法（IWUF 2024，PDF）");a.href="iwuf-sanda-rules-2024.pdf";a.setAttribute("download","");p.appendChild(a);p.appendChild(el("span",null,"中英对照，59 页；手册里的规则章只整理了新人需要知道的部分"));list.appendChild(p);const q=el("p","dl");const b=el("a",null,"⬇ 规则与裁判法讲解（IWUF 2024 裁判培训班讲义，PPT）");b.href="iwuf-sanda-rules-lecture-2024.pptx";b.setAttribute("download","");q.appendChild(b);q.appendChild(el("span",null,"逐条讲解怎么判，附比赛照片"));list.appendChild(q);}
 }
 function renderFitness(list,items){
   const LN=["","一级","二级","三级"];
